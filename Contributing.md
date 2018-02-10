@@ -27,4 +27,4 @@ Some things that will increase the chance that your pull request is accepted:
 
 ### Attribute
 
-We all agrees with the contributing from [Factory Bot Rail](https://github.com/thoughtbot/factory_bot_rails/blob/master/CONTRIBUTING.md)
+The maintainers all agree with the contributing guidelines from [Factory Bot Rail](https://github.com/thoughtbot/factory_bot_rails/blob/master/CONTRIBUTING.md)
