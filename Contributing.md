@@ -1,6 +1,8 @@
 # Contributing
 
-We love pull requests from everyone. By participating in this project, you agree to abide by the HAM [code of conduct](https://github.com/UBC-MDS/HAM_Python/blob/master/Code_of_Conduct.md).
+For individual workflows, developers are permitted to use branching, as described in the [GitFlow guide](https://guides.github.com/introduction/flow/).
+
+By participating in this project, you agree to abide by the HAM [code of conduct](https://github.com/UBC-MDS/HAM_Python/blob/master/Code_of_Conduct.md).
 
 Fork, then clone the repo:
 
