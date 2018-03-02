@@ -25,17 +25,12 @@ Currently, our package only handles continuous features.
     - Argument: 
       - dataset
       - color
-  - `function2()`: density/bar (vizmis) - single variable to dig deeper
-    - Argument: 
-      - dataset
-      - feature (if not specified, plot all missing value feature)
-      - color
-- `function3()`: Impute the missing value (para: method (CC, Imputation, KNN imputation, ...))
+- `function2()`: Impute the missing value (para: method (CC, Imputation, KNN imputation, ...))
     - Input:
       - dataset with missing values (if user don't want to impute the whole dataset, they will have to subset upfront)
       - a method name
     - Output: dataset with no missing values
-- `function4()`: Compare summary statistics between various imputation methods
+- `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
       - original dataset containing missing values 
       - methods that users want to compare
