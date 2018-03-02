@@ -4,8 +4,8 @@ Jordan_function_placeholder
 
 Linsey_function_placeholder
 
-# A summary function that compares summary statistics between various imputation methods
 
+# A summary function that compares summary statistics between various imputation methods
 compare_model(feature, methods=c("CC","IMP")): 
 	"""
 	This function will call function `linsey()` for several methods and
