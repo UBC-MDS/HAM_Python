@@ -25,7 +25,7 @@ Currently, our package only handles continuous features.
     - Argument: 
       - dataset
       - color
-- `function3()`: Impute the missing value (para: method (CC, Imputation, KNN imputation, ...))
+- `function2()`: Impute the missing value (para: method (CC, Imputation, KNN imputation, ...))
     - Input:
       - dataset with missing values (if user don't want to impute the whole dataset, they will have to subset upfront)
       - a method name
