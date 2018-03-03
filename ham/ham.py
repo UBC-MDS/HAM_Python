@@ -8,7 +8,7 @@ Linsey_function_placeholder
 # A summary function that compares summary statistics between various imputation methods
 compare_model(feature, methods=c("CC","IMP")): 
 	"""
-	This function will call function `linsey()` for several methods and
+	This function will call function `impute_missing()` for several methods and
 	return a table with some statistical information of the specified feature 
 	before and after imputation of different methods
 	
@@ -26,10 +26,10 @@ compare_model(feature, methods=c("CC","IMP")):
         a summary table comparing the summary statistics: count, mean, std, min, 25%, 50%, 75%, max.
 	"""
     
-	assert feature != None "Missing feature"
-    assert isinstance(methods, list) or isinstance(methods, str) 
+	assert feature != None, "Missing feature"
+    assert isinstance(methods, list) or isinstance(methods, str),
     "Input method(s) is not in the right type"
-    assert isinstance(feature, pd.DataFrame) or isinstance(feature, np.ndarray) 
+    assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), 
     "Input feature is not in the right type"
     
     
