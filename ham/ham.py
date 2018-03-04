@@ -1,6 +1,20 @@
 # Will make it as an OOP later with all functions below
 
-Jordan_function_placeholder
+def vis_missing(data_obj, colour=default, missing_val_char=NaN):
+    """
+    This function takes a data frame and returns a visualization of all missing values. 
+    The missing values are encoded by the missing val character, which is a numpy NaN by default. 
+
+    Parameters:
+        - data_obj: a data frame or matrix
+        - colour: a colour mapping specification for seaborn in Python 
+        - missing_val_char: This function supports any of the following missing value types: NaN, "", "?"
+
+    Errors:
+        - if a specified missing value character isn't in the accepted list, raise an error 
+        - if the data object is not a matrix or data frame, raise an error
+        - if the colour mapping is not a valid seaborn mapping, print a warning and use default colours
+    """
 
 def impute_missing(df, method, missing_val_char):
     '''
