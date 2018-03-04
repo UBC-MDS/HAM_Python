@@ -1,9 +1,11 @@
 import pandas as pd
+import numpy as np
+from ham import compare_model
 
 df = pd.DataFrame(np.random.randint(low=500, high=1000, size=(50, 4)),
                    columns=['col1', 'col2', 'col3', 'col4'])
 
-Jordan_test_placeholder
+#Jordan_test_placeholder
 
 ### impute_missing()
 
@@ -11,33 +13,33 @@ def test_input_types():
   '''
   Check input types of the function
   '''
-    with pytest.raises(TypeError): 
-        # data type is not supported
-        impute_missing(list(), "CC", "NaN") 
-    with pytest.raises(TypeError): 
-        # method name is unavaiable
-        impute_missing(np.array([[1, np.nan, 3], [4, np.nan, 6]]), "multi_imputation", "NaN")
-    with pytest.raises(TypeError): 
-        # missing value character is not supported
-        impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('ABC')), "mean_im", 0)
+  with pytest.raises(TypeError):
+  # data type is not supported
+    impute_missing(list(), "CC", "NaN")
+  with pytest.raises(TypeError):
+  # method name is unavaiable
+    impute_missing(np.array([[1, np.nan, 3], [4, np.nan, 6]]), "multi_imputation", "NaN")
+  with pytest.raises(TypeError):
+    # missing value character is not supported
+    impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('ABC')), "mean_im", 0)
 
 def test_output_type(selection):
   '''
   Test that output type is a dataframe or a matrix
   '''
-    if isinstance(df, pd.DataFrame):
-        assert isinstance(impute_missing(), pd.DataFrame)
-    else if isinstance(df, np.array):
-        assert isinstance(impute_missing(), np.array)
+  if isinstance(df, pd.DataFrame):
+    assert isinstance(impute_missing(), pd.DataFrame)
+  elif isinstance(df, np.array):
+    assert isinstance(impute_missing(), np.array)
 
 def test_output_values(selection):
   '''
   test that the output data frame has no missing values
   '''
-    if isinstance(df, pd.DataFrame):
-        assert not impute_missing().isnull().any().any()
-    else if isinstance(df, np.array):
-        assert not np.any(np.isnan(impute_missing()))
+  if isinstance(df, pd.DataFrame):
+    assert not impute_missing().isnull().any().any()
+  elif isinstance(df, np.array):
+    assert not np.any(np.isnan(impute_missing()))
 
 ### Compare_model() 
 
