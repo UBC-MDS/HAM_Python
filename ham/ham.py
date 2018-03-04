@@ -2,7 +2,16 @@
 
 Jordan_function_placeholder
 
-Linsey_function_placeholder
+def impute_missing(df, method, missing_val_char):
+    '''
+    This function takes a data frame with missing values and returns a complete data frame. 
+
+    Parameters:
+        - df: a data frame or matrix
+        - method: different methods to handle missing values like CC, mean imputation and  most frequent
+        - missing_val_char: supports any of the following missing value types: NA, NaN, "", "?"
+    '''
+    return new_df
 
 
 # A summary function that compares summary statistics between various imputation methods
