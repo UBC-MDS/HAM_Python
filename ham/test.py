@@ -11,11 +11,14 @@ def test_input_types():
   '''
   Check input types of the function
   '''
-    with pytest.raises(TypeError):
-        impute_missing(list(), "CC", "NaN")
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError): 
+        # data type is not supported
+        impute_missing(list(), "CC", "NaN") 
+    with pytest.raises(TypeError): 
+        # method name is unavaiable
         impute_missing(np.array([[1, np.nan, 3], [4, np.nan, 6]]), "multi_imputation", "NaN")
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError): 
+        # missing value character is not supported
         impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('ABC')), "mean_im", 0)
 
 def test_output_type(selection):
