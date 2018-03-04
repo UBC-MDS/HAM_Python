@@ -15,7 +15,7 @@ def impute_missing(df, method, missing_val_char):
 
 
 # A summary function that compares summary statistics between various imputation methods
-compare_model(feature, methods=c("CC","IMP")): 
+def compare_model(feature, methods="CC"):
 	"""
 	This function will call function `impute_missing()` for several methods and
 	return a table with some statistical information of the specified feature 
@@ -25,7 +25,7 @@ compare_model(feature, methods=c("CC","IMP")):
         feature (ndarray) -- a vector or matrix of a specified feature from the original dataset 
             containing missing values that needs to be imputed.
             
-        methods (str or list)-- the methods that users want to compare (default: c("CC","IMP"))
+        methods (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
             Supporting methods are: 
                 CC 	- Complete Case
                 IMP - Imputation with mean value
