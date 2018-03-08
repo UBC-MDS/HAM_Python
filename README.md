@@ -20,16 +20,18 @@ We decided to make this project because we have not found any package that handl
 
 Currently, our package only handles continuous features.
 
-- Exploratory Function: use ggplot2/matplotlib/seaborn to plot patterns or proportions of missing values in the dataset:
-  - `function1()`: possibly heatmap - whole dataset to give an overview of the situation
-    - Argument: 
+- Exploratory Function: use matplotlib and seaborn to plot patterns or proportions of missing values in the dataset:
+  - `vis_missing()`: A heatmap that visualizes the missing values in the data set. 
+    - Input: 
       - dataset
-      - color
-- `function2()`: Impute the missing value (para: method (CC, Imputation, KNN imputation, ...))
+      - seaborn color scheme 
+      - missing value character (NaN, "", "?")
+- `impute_missing()`: Impute the missing value (para: method (CC, Mean imputation, Most frequent element, ...))
     - Input:
       - dataset with missing values (if user don't want to impute the whole dataset, they will have to subset upfront)
       - a method name
-    - Output: dataset with no missing values
+      - missing value characters (NA, NaN, "", "?")
+    - Output: data frame/matrix with no missing values
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
       - original dataset containing missing values 

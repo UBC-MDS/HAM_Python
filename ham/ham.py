@@ -1,12 +1,35 @@
 # Will make it as an OOP later with all functions below
 
-Jordan_function_placeholder
+def vis_missing(data_obj, colour=default, missing_val_char=NaN):
+    """
+    This function takes a data frame and returns a visualization of all missing values. 
+    The missing values are encoded by the missing val character, which is a numpy NaN by default. 
 
-Linsey_function_placeholder
+    Parameters:
+        - data_obj: a data frame or matrix
+        - colour: a colour mapping specification for seaborn in Python 
+        - missing_val_char: This function supports any of the following missing value types: NaN, "", "?"
+
+    Errors:
+        - if a specified missing value character isn't in the accepted list, raise an error 
+        - if the data object is not a matrix or data frame, raise an error
+        - if the colour mapping is not a valid seaborn mapping, print a warning and use default colours
+    """
+
+def impute_missing(df, method, missing_val_char):
+    '''
+    This function takes a data frame with missing values and returns a complete data frame. 
+
+    Parameters:
+        - df: a data frame or matrix
+        - method: different methods to handle missing values like CC, mean imputation and  most frequent
+        - missing_val_char: supports any of the following missing value types: NA, NaN, "", "?"
+    '''
+    return new_df
 
 
 # A summary function that compares summary statistics between various imputation methods
-compare_model(feature, methods=c("CC","IMP")): 
+def compare_model(feature, methods="CC"):
 	"""
 	This function will call function `impute_missing()` for several methods and
 	return a table with some statistical information of the specified feature 
@@ -16,7 +39,7 @@ compare_model(feature, methods=c("CC","IMP")):
         feature (ndarray) -- a vector or matrix of a specified feature from the original dataset 
             containing missing values that needs to be imputed.
             
-        methods (str or list)-- the methods that users want to compare (default: c("CC","IMP"))
+        methods (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
             Supporting methods are: 
                 CC 	- Complete Case
                 IMP - Imputation with mean value
