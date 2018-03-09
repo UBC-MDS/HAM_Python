@@ -84,15 +84,32 @@ def test_compare():
     """
     meds = ("CC","IMP")
     feature = 'col1'
-    result = compare_model(feature,methods = meds)
+    result = compare_model(df,feature,methods = meds)
     a = df[feature].describe()
     test = pd.DataFrame(data=a)
 
     for method in meds:
-      df_after = impute_missing('col1',method)
+      df_after = impute_missing(df2,method,"NaN")
       b = df_after[feature].describe()
       b = pd.DataFrame(data=b)
       name = feature + '_after_' + method
       test[name] = b[feature]
     assert isinstance(result, pd.DataFrame) == True, "The output should be a dataframe"
-    assert test == result, "The result has some problem"
+    assert test.equals(result) == True, "The result has some problem"
+    
+def no_change():
+    
+    meds = ("CC","IMP")
+    feature = 'col1'
+    result = compare_model(df,feature,methods = meds)
+    a = df[feature].describe()
+    test = pd.DataFrame(data=a)
+
+    for method in meds:
+        df_after = impute_missing(df2,method,"NaN")
+        b = df_after[feature].describe()
+        b = pd.DataFrame(data=b)
+        name = feature + '_after_' + method
+        test[name] = b[feature]
+    
+    
