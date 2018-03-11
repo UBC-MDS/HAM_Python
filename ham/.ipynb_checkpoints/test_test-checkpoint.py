@@ -96,8 +96,12 @@ def test_compare():
       b = pd.DataFrame(data=b)
       name = feature + '_after_' + method
       test[name] = b[feature]
-    assert isinstance(result, pd.DataFrame) == True, "The output should be a dataframe"
-    assert test.equals(result) == True, "The result has some problem"
+
+    if not isinstance(result, pd.DataFrame):
+        raise TypeError("Output type must be a dataframe")
+    
+    if not test.equals(result):
+        raise ValueError("The result has some problem")
 
 def test_input():
     '''
@@ -118,18 +122,19 @@ def test_input():
         
 def no_change():
     
-    meds = ("CC","IMP")
+    meds = ["CC","MIP"]
     feature = 'col1'
-    result = compare_model(df,feature,methods = meds)
+    result = compare_model(df,feature,methods = meds, missing_val_char="NaN")
     a = df[feature].describe()
     test = pd.DataFrame(data=a)
 
     for method in meds:
-        df_after = impute_missing(df,method,"NaN")
+        df_after = impute_missing(df,feature,method,"NaN")
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
-        assert not pd.DataFrame(data=a).equals(b), "The data information does not change after imputation"
+        if not pd.DataFrame(data=a).equals(b):
+            raise ValueError("The data information does not change after imputation")
         
         test[name] = b[feature]
     
@@ -138,6 +143,9 @@ def test_output_type():
     '''
     Test that output type is a dataframe or a matrix
     '''
-    
-    assert isinstance(compare_model(df,feature,methods = meds), pd.DataFrame) "Output type must be a dataframe"
+    meds = ("CC","MIP")
+    feature = 'col1'
+
+    if not isinstance(compare_model(df,feature,methods = meds,missing_val_char="NaN"), pd.DataFrame):
+        raise TypeError("Output type must be a dataframe")
 
