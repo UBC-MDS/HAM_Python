@@ -2,9 +2,9 @@
 
 `todf()`
 
-| Condition | Test Function |
-|---|---|
-| "Expected a Data Frame or Matrix" | `todf([1, 2, 3, 4], "a")` |
+| Condition                                | Test Function                            |
+| ---------------------------------------- | ---------------------------------------- |
+| "Expected a Data Frame or Matrix"        | `todf([1, 2, 3, 4], "a")`                |
 | "Number of columns in matrix does not match number of column names inputted" | `todf(np.matrix([[1, 2], [3, np.nan]]), ["a", "b", "c"])` |
 | "Expected the column names to be in a list" | `todf(np.matrix([[1, 2], [3, np.nan]]), "abc")` |
 | "output type is a data frame when input is a matrix" | `assert isinstance(todf(np.matrix([[1, 2], [3, np.nan]])), pd.DataFrame)` |
@@ -16,22 +16,34 @@
 
 `vis_missing()`
 
-| Condition | Test Function |
-|-----------|---------------|
-| if not missing_val_char in [np.NaN, np.NAN, np.nan, "?", " ", ""] (raises TypeError) | `test_char()` |
-| if not missing_val_char in [np.NaN, np.NAN, np.nan] | ## currently broken  | 
-| if colour not in cmaps|`test_colour()`|
+| Condition                                | Test Function       |
+| ---------------------------------------- | ------------------- |
+| if not missing_val_char in [np.NaN, np.NAN, np.nan, "?", " ", ""] (raises TypeError) | `test_char()`       |
+| if not missing_val_char in [np.NaN, np.NAN, np.nan] | ## currently broken |
+| if colour not in cmaps                   | `test_colour()`     |
 
 
 `impute_missing()`
 
-| Condition | Test Function |
-|---|---|
-| "column name must be a string" | `impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.NaN)` |
+| Condition                                | Test Function                            |
+| ---------------------------------------- | ---------------------------------------- |
+| "column name must be a string"           | `impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.NaN)` |
 | "the specified column name is not in the data frame" | `impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "d", "CC", np.nan)` |
-| "method is not applicable" | `impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "b", "multi", np.nan)` |
-| "missing value format is not supported" | `impute_missing(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('abc')), "b", "MIP", 0)` |
-| "output type is a dataframe" | `assert isinstance(impute_missing(np.matrix([[1, 2], [3, np.nan], [5, 6]]), 'b', "CC", np.nan), pd.DataFrame)` |
+| "method is not applicable"               | `impute_missing(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "b", "multi", np.nan)` |
+| "missing value format is not supported"  | `impute_missing(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('abc')), "b", "MIP", 0)` |
+| "output type is a dataframe"             | `assert isinstance(impute_missing(np.matrix([[1, 2], [3, np.nan], [5, 6]]), 'b', "CC", np.nan), pd.DataFrame)` |
 | "the specified column of the output data frame has no missing values" | `assert not impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)['b'].isnull().any()` |
-| "the input is a data frame" (9 tests) | `test_output_data_frame()` |
-| "the input is a matrix" (3 tests) | `test_output_matrix()` |
+| "the input is a data frame" (9 tests)    | `test_output_data_frame()`               |
+| "the input is a matrix" (3 tests)        | `test_output_matrix()`                   |
+
+
+
+`compare_model()`
+
+| Condition                                | Test Function      |
+| ---------------------------------------- | ------------------ |
+| Test the base case                       | test_compare()     |
+| Check input types of the function        | test_input()       |
+| Test if there is no change to the dataframe after imputation. | no_change()        |
+| Test that output type is a dataframe or a matrix | test_output_type() |
+
