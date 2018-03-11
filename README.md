@@ -47,11 +47,13 @@ Currently, our package only handles continuous features.
 
 ## Typical Usage
 
+```
 from ham import to_df, vis_missing, impute_missing, compare_model
 
 ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 
 ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)
+```
 
 ## HAM in R
 
