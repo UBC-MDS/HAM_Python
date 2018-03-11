@@ -3,15 +3,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd 
 
-def todf(data_obj, col_names = None):
+def todf(data_obj, col_names=None):
     """
     Author: JD, March 2018 - based on the code in hamr by Linsey Yao
-
     Tests whether the inputted data object is a matrix or a data frame. If neither, raises a Value Error.
-
     Converts a matrix to a data frame with user specified column names (col_names). If a data frame is inputted, 
     it is returned as a pandas data frame again (alternative possibility: return the data_obj itself, but this option seems safer). 
-
     Inputs:
         - data_obj: can be any object type. Will return a ValueError if data_obj is not a matrix or data frame 
         - col_names: a list of column names. Will return a ValueError if it is not a list 
@@ -19,15 +16,19 @@ def todf(data_obj, col_names = None):
 
     if (not isinstance(data_obj, pd.DataFrame)) and (not isinstance(data_obj, np.matrix)):
         raise ValueError("Expected a Data Frame or Matrix") 
-
-    if isinstance(data_obj, np.matrix):
-        ## ensure the number given column names matches the number of columns 
-        if not col_names is None: 
-            assert mat.shape[1] == len(col_names), "Number of columns in matrix does not match number of column names inputted"
+    
+    if isinstance(data_obj, np.matrix) and col_names != None:
+        if data_obj.shape[1] != len(col_names):
+            raise ValueError("Number of columns in matrix does not match number of column names inputted")
         if not isinstance(col_names, list):
             raise ValueError("Expected the column names to be in a list")
         else:
             return pd.DataFrame(data_obj, columns=col_names)
+        
+    if isinstance(data_obj, np.matrix) and col_names is None:
+        data_obj = pd.DataFrame(data_obj, columns=list(map(chr, range(97, 97+data_obj.shape[1]))))
+        return data_obj
+    
     else:
         ## if a data frame is inputted, data frame is returned
         return pd.DataFrame(data_obj)
@@ -85,17 +86,77 @@ def vis_missing(data_obj, colour="inferno", missing_val_char=np.NaN):
     return fig
 
 
-def impute_missing(df, method, missing_val_char):
-    '''
-    Author: LY, 2018
-    This function takes a data frame with missing values and returns a complete data frame. 
+def impute_missing(dfm, col, method, missing_val_char):
+    """
+    Author: LY, March 2018
 
-    Parameters:
-        - df: a data frame or matrix
-        - method: different methods to handle missing values like CC, mean imputation and  most frequent
-        - missing_val_char: supports any of the following missing value types: NA, NaN, "", "?"
-    '''
-    return new_df
+    impute missing values for a column in a data frame or a numerical matrix with three simple methods 
+    
+    inputs
+    ------
+    dfm: a pd.DataFrame or a np.matrix
+    col (str): a column name
+    method (str): different methods to handle missing values like "CC", "MIP" and "DIP"
+    missing_val_char: supports any of the following missing value types: NaN, "", "?"
+    
+    returns:
+    a data frame having no missing values in the specified column
+    """
+    
+    dfm = todf(dfm)
+    
+    if isinstance(col, str) != True:
+        raise TypeError("column name must be a string") 
+    if col not in dfm.columns.values.tolist():
+        raise TypeError("the specified column name is not in the data frame")
+    if method not in ["CC", "MIP", "DIP"]:
+        raise TypeError("method is not applicable")    
+    if isinstance(missing_val_char, float) and np.isnan(missing_val_char) == False:
+        raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
+    if isinstance(missing_val_char, str) and missing_val_char not in ["", "?"]:
+        raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
+    if isinstance(missing_val_char, float) == False and missing_val_char not in ["", "?"]:
+        raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
+    
+    if method == "CC":
+        if isinstance(missing_val_char, float) and np.isnan(missing_val_char) == True:
+            dfm = dfm.dropna(subset = [col])
+        elif isinstance(missing_val_char, str) and missing_val_char in ["", "?"]:
+            vec = dfm[col]
+            vec = vec.replace("", np.nan)
+            vec = vec.replace("?", np.nan)
+            dfm[col] = vec
+            dfm = dfm.dropna(subset = [col])
+
+    elif method == "MIP":
+        if isinstance(missing_val_char, float) and np.isnan(missing_val_char) == True:
+            vec = dfm[col]
+            vec = vec.fillna(vec.mean())
+            dfm[col] = vec
+        elif isinstance(missing_val_char, str) and missing_val_char in ["", "?"]:
+            vec = dfm[col]
+            vec = vec.replace("", np.nan)
+            vec = vec.replace("?", np.nan)
+            vec = vec.astype('float').values
+            vec = pd.DataFrame(vec)
+            vec = vec.fillna(vec[~np.isnan(vec)].mean())
+            dfm[col] = vec
+
+    elif method == "DIP":
+        if isinstance(missing_val_char, float) and np.isnan(missing_val_char) == True:
+            vec = dfm[col]
+            vec = vec.fillna(vec.median())
+            dfm[col] = vec
+        elif isinstance(missing_val_char, str) and missing_val_char in ["", "?"]:
+            vec = dfm[col]
+            vec = vec.replace("", np.nan)
+            vec = vec.replace("?", np.nan)
+            vec = vec.astype('float').values
+            vec = pd.DataFrame(vec)
+            vec = vec.fillna(vec[~np.isnan(vec)].median())
+            dfm[col] = vec
+            
+    return dfm
 
 
 # A summary function that compares summary statistics between various imputation methods
