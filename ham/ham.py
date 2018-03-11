@@ -122,9 +122,9 @@ def compare_model(feature, methods="CC"):
 	"""
     
 	assert feature != None, "Missing feature"
-    assert isinstance(methods, list) or isinstance(methods, str),
+    assert isinstance(methods, list) or isinstance(methods, str)
     "Input method(s) is not in the right type"
-    assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), 
+    assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray)
     "Input feature is not in the right type"
     
     
