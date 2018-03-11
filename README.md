@@ -33,8 +33,8 @@ Currently, our package only handles continuous features.
   - `vis_missing()`: A heatmap that visualizes the missing values in the data set. 
     - Input: 
       - dataset
-      - seaborn color scheme 
-      - missing value character (NaN, "", "?")
+      - seaborn color scheme, default is "inferno"
+      - missing value character (np.NaN, np.NAN, np.nan," ", "", "?")
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
@@ -58,6 +58,8 @@ from ham import to_df, vis_missing, impute_missing, compare_model
 ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 
 ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)
+
+ham.vis_missing(df, missing_val_char = "?")
 ```
 
 ## HAM in R
