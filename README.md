@@ -10,6 +10,10 @@ Handle All Missing (Values)
 2. [Jordan Dubchak](https://github.com/jdubchak)
 3. [Linsey Yao](https://github.com/yllz)
 
+## To install please execute the following from the command line:
+
+pip install git + https://github.com/UBC-MDS/HAM_Python.git
+
 ## Introduction
 
 Our package intends to explore the pattern of missing values in users' dataset and also imputes the missing values using several methods. 
@@ -20,18 +24,24 @@ We decided to make this project because we have not found any package that handl
 
 Currently, our package only handles continuous features.
 
+- `todf(data_obj, col_names=None)`: convert a matrix to a data frame or returns the original input data frame
+    - Input:
+      - `data_obj`: a data frame or a numerical matrix
+      - `col_names`: a list of column names (default is None)
+    - Output: If the `col_names` is None, then returns a data frame with small letters ('a', 'b', ...) being column names. Otherwise returns a data frame with user-specified column names.
 - Exploratory Function: use matplotlib and seaborn to plot patterns or proportions of missing values in the dataset:
   - `vis_missing()`: A heatmap that visualizes the missing values in the data set. 
     - Input: 
       - dataset
       - seaborn color scheme 
       - missing value character (NaN, "", "?")
-- `impute_missing()`: Impute the missing value (para: method (CC, Mean imputation, Most frequent element, ...))
+- `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
-      - dataset with missing values (if user don't want to impute the whole dataset, they will have to subset upfront)
-      - a method name
-      - missing value characters (NA, NaN, "", "?")
-    - Output: data frame/matrix with no missing values
+      - `dfm`: a data frame or a numerical matrix with missing values
+      - 'col`: a column name (string)
+      - `method`: a method name ("CC", "MIP", "DIP")
+      - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
+    - Output: a data frame with no missing values in the specified column
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
       - original dataset containing missing values 
@@ -40,6 +50,16 @@ Currently, our package only handles continuous features.
     - Call the above function for several methods
     - Compare the summary statistics of what being imputed in the dataset using several available methods
 
+## Typical Usage
+
+```
+from ham import to_df, vis_missing, impute_missing, compare_model
+
+ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
+
+ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)
+```
+
 ## HAM in R
 
-This package is also available in [R](https://github.com/UBC-MDS/HAM_R)
+This package is also available in [R](https://github.com/UBC-MDS/hamr)
