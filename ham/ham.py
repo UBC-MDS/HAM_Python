@@ -113,9 +113,9 @@ def impute_missing(dfm, col, method, missing_val_char):
         raise TypeError("method is not applicable")    
     if isinstance(missing_val_char, float) and np.isnan(missing_val_char) == False:
         raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
-    if isinstance(missing_val_char, str) and missing_val_char not in ["", "?"]:
+    if isinstance(missing_val_char, str) and missing_val_char not in ["NaN","", "?"]:
         raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
-    if isinstance(missing_val_char, float) == False and missing_val_char not in ["", "?"]:
+    if isinstance(missing_val_char, float) == False and missing_val_char not in ["NaN","", "?"]:
         raise TypeError("missing value format is not supported, expected one of a blank space, a question mark and np.NaN")
     
     if method == "CC":
@@ -160,8 +160,8 @@ def impute_missing(dfm, col, method, missing_val_char):
 
 
 # A summary function that compares summary statistics between various imputation methods
-def compare_model(df, feature, methods="CC"):
-	"""
+def compare_model(df, feature, methods, missing_val_char):
+    """
     Author: DV, March 2018
 
 	This function will call function `impute_missing()` for several methods and
@@ -169,7 +169,8 @@ def compare_model(df, feature, methods="CC"):
 	before and after imputation of different methods
 	
 	Args:
-        feature (ndarray) -- a vector or matrix of a specified feature from the original dataset 
+        df (ndarray) -- the original dataset with missing values that needs to be imputed.
+        feature (str) -- name of a specified feature from the original dataset 
             containing missing values that needs to be imputed.
             
         methods (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
@@ -177,22 +178,24 @@ def compare_model(df, feature, methods="CC"):
                 CC 	- Complete Case
                 MIP - Imputation with mean value
                 DIP - Imputation with median value
-      
+        missing_val_char (str) -- missing value types. Supporting types are:
+                NaN - Not a Number
+                "" - Blank
+                "?" - Question mark
+    
     Returns: 
         a summary table comparing the summary statistics: count, mean, std, min, 25%, 50%, 75%, max.
-	"""
+    """
     
-	assert feature != None, "Missing feature"
-    assert (isinstance(methods, list) == True or isinstance(methods, str) == True),
-    "Input method(s) is not in the right type"
-    assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), 
-    "Input feature is not in the right type"
+    assert feature != None, "Missing feature"
+    assert isinstance(methods, (tuple,list,str)), "Input method(s) is not in the right type"
+    assert isinstance(feature, (pd.DataFrame, str)), "Input feature is not in the right type"
 
     a = df[feature].describe()
     result = pd.DataFrame(data=a)
 
-    for method in meds:
-        df_after = impute_missing(df2,method,"NaN")
+    for method in methods:
+        df_after = impute_missing(df2,feature,method,"NaN")
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
