@@ -160,7 +160,7 @@ def impute_missing(dfm, col, method, missing_val_char):
 
 
 # A summary function that compares summary statistics between various imputation methods
-def compare_model(feature, methods="CC"):
+def compare_model(df, feature, methods="CC"):
 	"""
     Author: DV, March 2018
 
@@ -175,17 +175,29 @@ def compare_model(feature, methods="CC"):
         methods (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
             Supporting methods are: 
                 CC 	- Complete Case
-                IMP - Imputation with mean value
-                KNN - Using KNN to impute the missing value
+                MIP - Imputation with mean value
+                DIP - Imputation with median value
       
     Returns: 
         a summary table comparing the summary statistics: count, mean, std, min, 25%, 50%, 75%, max.
 	"""
     
 	assert feature != None, "Missing feature"
-    assert isinstance(methods, list) or isinstance(methods, str),
+    assert (isinstance(methods, list) == True or isinstance(methods, str) == True),
     "Input method(s) is not in the right type"
     assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), 
     "Input feature is not in the right type"
+
+    a = df[feature].describe()
+    result = pd.DataFrame(data=a)
+
+    for method in meds:
+        df_after = impute_missing(df2,method,"NaN")
+        b = df_after[feature].describe()
+        b = pd.DataFrame(data=b)
+        name = feature + '_after_' + method
+        result[name] = b[feature]
+    
+    return result
     
     
