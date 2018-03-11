@@ -217,7 +217,9 @@ def test_input():
     
         
 def no_change():
+    """
     
+    """
     meds = ["CC","MIP"]
     feature = 'col1'
     result = compare_model(df,feature,methods = meds, missing_val_char="NaN")
@@ -236,9 +238,9 @@ def no_change():
     
 
 def test_output_type():
-    '''
+    """
     Test that output type is a dataframe or a matrix
-    '''
+    """
     meds = ("CC","MIP")
     feature = 'col1'
 

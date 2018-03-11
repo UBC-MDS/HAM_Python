@@ -44,10 +44,30 @@ Currently, our package only handles continuous features.
     - Output: a data frame with no missing values in the specified column
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
-      - original dataset containing missing values 
-      - methods that users want to compare
+
+      - `df` (ndarray) -- the original dataset with missing values that needs to be imputed
+      - `feature` (str) -- name of a specified feature from the original dataset 
+
+      ​        containing missing values that need to be imputed
+
+      - `methods` (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
+
+      ​        Supporting methods are: 
+      ​            CC 	- Complete Case
+      ​            MIP     - Imputation with mean value
+      ​            DIP     - Imputation with median value
+
+      - `missing_val_char` (str) -- missing value types. 
+
+      ​        Supporting types are:
+      ​            NaN - Not a Number
+      ​            ""     - Blank
+      ​            "?"   - Question mark
+
     - Output: a summary table
+
     - Call the above function for several methods
+
     - Compare the summary statistics of what being imputed in the dataset using several available methods
 
 ## Typical Usage
@@ -57,9 +77,11 @@ from ham import to_df, vis_missing, impute_missing, compare_model
 
 ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 
-ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)
+ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
 
 ham.vis_missing(df, missing_val_char = "?")
+
+ham.compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
 
 ## HAM in R
