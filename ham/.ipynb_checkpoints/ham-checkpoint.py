@@ -171,7 +171,7 @@ def compare_model(df, feature, methods, missing_val_char):
 	Args:
         df (ndarray) -- the original dataset with missing values that needs to be imputed.
         feature (str) -- name of a specified feature from the original dataset 
-            containing missing values that needs to be imputed.
+            containing missing values that need to be imputed.
             
         methods (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
             Supporting methods are: 
