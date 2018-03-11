@@ -12,7 +12,7 @@ df2 = pd.DataFrame(np.random.randint(low=500, high=1000, size=(50, 4)),
                    columns=['col1', 'col2', 'col3', 'col4'])
 
 ## add missing values 
-for ind, row in df.iterrows():
+for ind, row in df2.iterrows():
     if ind % 3 == 0:
         df2.loc[ind, "col1"] = np.nan
     if ind % 4 ==1:
@@ -24,23 +24,37 @@ def test_ylims():
     """
     This test ensures the y-axis limits of the heatmap range from 0 to 50 for the df2 data frame.
     """
-    vis_object = vis_missing(df2, missing_val_char="NaN")
+    vis_object = vis_missing(df2, missing_val_char=np.NaN)
     assert vis_object.get_ylim() == (50.0, 0.0)
 
 def test_xlims():
     """
     This test ensures the x-axis limits of the heatmap range from 0 to 4 (4 columns) for the df2 data frame.
     """
-    vis_object = vis_missing(df2, missing_val_char="NaN")
+    vis_object = vis_missing(df2, missing_val_char=np.NaN)
     assert vis_object.get_xlim() == (0.0, 4.0)
 
 def test_yticks():
     """
-    This test ensures the y-tick labels of the df2 data frame heatmap are the same as the array given below. 
+    This test ensures the scale of the df2 data frame heatmap is linear  
     """
-    vis_object = vis_missing(df2, missing_val_char="NaN")
-    assert obj.get_yticks() == array([ 0.5,  3.5,  6.5,  9.5, 12.5, 15.5, 18.5, 21.5, 24.5, 27.5, 30.5,
-       33.5, 36.5, 39.5, 42.5, 45.5, 48.5])
+    vis_object = vis_missing(df2, missing_val_char=np.NaN)
+    assert vis_object.get_yscale() == "linear"
+
+## for branch coverage - matrix
+def test_matrix():
+    """
+    This test ensures the `todf` function can properly convert a matrix to a data frame to use in vis_missing 
+    """
+    vis_object = vis_missing(np.matrix(df2), missing_val_char=np.NaN)
+    assert vis_object2.get_xlim() == (0.0, 4.0)
+
+def test_list():
+    """
+    This test ensures the `todf` function can properly reject a list when called within vis_missing 
+    """
+    with pytest.raises(ValueError):
+        vis_missing(list(df2), missing_val_char=np.NaN)
 
 ### tests for impute_missing()
 
