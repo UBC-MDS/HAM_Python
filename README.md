@@ -10,6 +10,10 @@ Handle All Missing (Values)
 2. [Jordan Dubchak](https://github.com/jdubchak)
 3. [Linsey Yao](https://github.com/yllz)
 
+## To install please execute the following from the command line:
+
+pip install git + https://github.com/UBC-MDS/HAM_Python.git
+
 ## Introduction
 
 Our package intends to explore the pattern of missing values in users' dataset and also imputes the missing values using several methods. 
@@ -40,10 +44,6 @@ Currently, our package only handles continuous features.
     - Output: a summary table
     - Call the above function for several methods
     - Compare the summary statistics of what being imputed in the dataset using several available methods
-
-## To install please execute the following from the command line:
-
-pip install git + https://github.com/UBC-MDS/HAM_Python.git
 
 ## Typical Usage
 
