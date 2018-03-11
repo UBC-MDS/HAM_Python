@@ -178,7 +178,8 @@ def compare_model(df, feature, methods, missing_val_char):
                 CC 	- Complete Case
                 MIP - Imputation with mean value
                 DIP - Imputation with median value
-        missing_val_char (str) -- missing value types. Supporting types are:
+        missing_val_char (str) -- missing value types. 
+            Supporting types are:
                 NaN - Not a Number
                 "" - Blank
                 "?" - Question mark
@@ -193,9 +194,9 @@ def compare_model(df, feature, methods, missing_val_char):
 
     a = df[feature].describe()
     result = pd.DataFrame(data=a)
-
+    
     for method in methods:
-        df_after = impute_missing(df2,feature,method,"NaN")
+        df_after = impute_missing(df,feature,method,"NaN")
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
