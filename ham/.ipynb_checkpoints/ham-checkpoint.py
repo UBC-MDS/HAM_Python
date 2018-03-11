@@ -193,9 +193,10 @@ def compare_model(df, feature, methods, missing_val_char):
 
     a = df[feature].describe()
     result = pd.DataFrame(data=a)
-
+    methods = ["CC","IMP"]
+    
     for method in methods:
-        df_after = impute_missing(df2,feature,method,"NaN")
+        df_after = impute_missing(df,feature,method,"NaN")
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
