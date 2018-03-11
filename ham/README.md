@@ -14,6 +14,14 @@
 | "the input is a data frame and col_names=None" | `assert todf(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('ABC'))).equals(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('ABC')))` |
 | "the input is a data frame and col_names is not None" | `assert todf(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('ABC')), ["a", "b"]).equals(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('ABC')))` |
 
+`vis_missing()`
+
+| Condition | Test Function |
+|-----------|---------------|
+| if not missing_val_char in [np.NaN, np.NAN, np.nan, "?", " ", ""] (raises TypeError) | `test_char()` |
+| if not missing_val_char in [np.NaN, np.NAN, np.nan] | ## currently broken  | 
+| if colour not in cmaps|`test_colour()`|
+
 
 `impute_missing()`
 
