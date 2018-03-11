@@ -29,12 +29,15 @@ Currently, our package only handles continuous features.
       - `data_obj`: a data frame or a numerical matrix
       - `col_names`: a list of column names (default is None)
     - Output: If the `col_names` is None, then returns a data frame with small letters ('a', 'b', ...) being column names. Otherwise returns a data frame with user-specified column names.
+    
 - Exploratory Function: use matplotlib and seaborn to plot patterns or proportions of missing values in the dataset:
-  - `vis_missing()`: A heatmap that visualizes the missing values in the data set. 
+  - `vis_missing()`: creates a heatmap that visualizes the missing values in the data set
     - Input: 
       - dataset
       - seaborn color scheme, default is "inferno"
       - missing value character (np.NaN, np.NAN, np.nan," ", "", "?")
+    - Output: a heatmap that visualizes the missing values in the dataset
+    
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
@@ -42,6 +45,7 @@ Currently, our package only handles continuous features.
       - `method`: a method name ("CC", "MIP", "DIP")
       - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
     - Output: a data frame with no missing values in the specified column
+    
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
 
@@ -73,7 +77,7 @@ Currently, our package only handles continuous features.
 ## Typical Usage
 
 ```
-from ham import to_df, vis_missing, impute_missing, compare_model
+from ham import todf, vis_missing, impute_missing, compare_model
 
 ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 
