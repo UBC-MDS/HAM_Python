@@ -160,7 +160,7 @@ def impute_missing(dfm, col, method, missing_val_char):
 
 
 # A summary function that compares summary statistics between various imputation methods
-def compare_model(df, feature, methods="CC"):
+def compare_model(df, feature, methods="CC", missing_val_char):
 	"""
     Author: DV, March 2018
 
@@ -177,7 +177,11 @@ def compare_model(df, feature, methods="CC"):
                 CC 	- Complete Case
                 MIP - Imputation with mean value
                 DIP - Imputation with median value
-      
+        missing_val_char (str) -- missing value types. Supporting types are:
+                NaN - Not a Number
+                "" - Blank
+                "?" - Question mark
+    
     Returns: 
         a summary table comparing the summary statistics: count, mean, std, min, 25%, 50%, 75%, max.
 	"""
