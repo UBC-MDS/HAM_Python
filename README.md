@@ -29,12 +29,15 @@ Currently, our package only handles continuous features.
       - `data_obj`: a data frame or a numerical matrix
       - `col_names`: a list of column names (default is None)
     - Output: If the `col_names` is None, then returns a data frame with small letters ('a', 'b', ...) being column names. Otherwise returns a data frame with user-specified column names.
+    
 - Exploratory Function: use matplotlib and seaborn to plot patterns or proportions of missing values in the dataset:
-  - `vis_missing()`: A heatmap that visualizes the missing values in the data set. 
+  - `vis_missing()`: creates a heatmap that visualizes the missing values in the data set
     - Input: 
       - dataset
       - seaborn color scheme, default is "inferno"
       - missing value character (np.NaN, np.NAN, np.nan," ", "", "?")
+    - Output: a heatmap that visualizes the missing values in the dataset
+    
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
@@ -42,24 +45,47 @@ Currently, our package only handles continuous features.
       - `method`: a method name ("CC", "MIP", "DIP")
       - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
     - Output: a data frame with no missing values in the specified column
+    
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
-      - original dataset containing missing values 
-      - methods that users want to compare
+
+      - `df` (ndarray) -- the original dataset with missing values that needs to be imputed
+      - `feature` (str) -- name of a specified feature from the original dataset 
+
+      ​        containing missing values that need to be imputed
+
+      - `methods` (str or list)-- the methods that users want to compare (default: ["CC","IMP"])
+
+      ​        Supporting methods are: 
+      ​            CC 	- Complete Case
+      ​            MIP     - Imputation with mean value
+      ​            DIP     - Imputation with median value
+
+      - `missing_val_char` (str) -- missing value types. 
+
+      ​        Supporting types are:
+      ​            NaN - Not a Number
+      ​            ""     - Blank
+      ​            "?"   - Question mark
+
     - Output: a summary table
+
     - Call the above function for several methods
+
     - Compare the summary statistics of what being imputed in the dataset using several available methods
 
 ## Typical Usage
 
 ```
-from ham import to_df, vis_missing, impute_missing, compare_model
+from ham import todf, vis_missing, impute_missing, compare_model
 
 ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 
-ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", np.nan)
+ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
 
 ham.vis_missing(df, missing_val_char = "?")
+
+ham.compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
 
 ## HAM in R
