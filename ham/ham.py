@@ -1,4 +1,5 @@
 import seaborn as sns
+import matplotlib
 import matplotlib.pyplot as plt 
 matplotlib.use('Agg')
 import numpy as np
