@@ -12,7 +12,9 @@ Handle All Missing (Values)
 
 ## To install please execute the following from the command line:
 
-pip install git + https://github.com/UBC-MDS/HAM_Python.git
+```
+pip install git+https://github.com/UBC-MDS/HAM_Python.git
+```
 
 ## Introduction
 
