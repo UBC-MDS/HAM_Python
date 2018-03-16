@@ -12,13 +12,19 @@ Handle All Missing (Values)
 
 ## To install please execute the following from the command line:
 
-pip install git + https://github.com/UBC-MDS/HAM_Python.git
+```
+pip install git+https://github.com/UBC-MDS/HAM_Python.git
+```
 
 ## Introduction
 
 Our package intends to explore the pattern of missing values in users' dataset and also imputes the missing values using several methods. 
 
 We decided to make this project because we have not found any package that handle both tasks in either R or Python. In R, we found [Amelia](https://cran.r-project.org/web/packages/Amelia/Amelia.pdf) and [vis_dat](https://cran.r-project.org/web/packages/visdat/index.html) package that only visualize the missing data and in Python we found [fancyimpute](https://pypi.python.org/pypi/fancyimpute) that deals with missing value but does not have any visualization and [missingno](https://github.com/ResidentMario/missingno) handle the visualization only. We thought this would be better package for users who do not have much experience in data wrangling.
+
+## Dependencies
+
+HAM_Python requires python 3. 
 
 ## Functions
 
@@ -78,6 +84,7 @@ Currently, our package only handles continuous features.
 
 ```
 import numpy as np
+<<<<<<< HEAD
 import pandas as pd
 import ham
 
@@ -86,6 +93,25 @@ todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
 impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
 
 vis_missing(np.matrix([[1, 2], [3, np.nan]]), missing_val_char = "?")
+=======
+from ham import todf, vis_missing, impute_missing, compare_model
+import numpy as np
+import pandas as pd
+
+## create matrix with missing values
+mat = np.matrix([[1, 2], [3, np.nan]])
+
+raw_data = np.matrix([[1, 2], [3, np.nan]])
+
+df1 = todf(raw_data, ["k", "o"])
+print(df1)
+
+df2 = impute_missing(raw_data, 'b', "CC", np.nan)
+print(df2)
+
+vis_dat = vis_missing(mat, missing_val_char = "?")
+print(vis_dat)
+>>>>>>> 92023959306f2a61fd47966b8b50d2ec9a068931
 
 compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
