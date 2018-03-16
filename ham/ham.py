@@ -76,7 +76,7 @@ def vis_missing(data_obj, colour="inferno", missing_val_char=np.NaN):
     
     ## if the colour map specified isn't a cmap option, 
     if colour not in cmaps:
-        warnings.warn("Colour map given is not recognized. Using default inferno.", Warning)
+        warnings.simplefilter("Colour map given is not recognized. Using default inferno.", UserWarning)
         colour = "inferno"
     
     new_df = np.where(df.isnull(), 1, 0)

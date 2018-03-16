@@ -81,7 +81,7 @@ def test_matrix():
     This test ensures the `todf` function can properly convert a matrix to a data frame to use in vis_missing 
     """
     vis_object = vis_missing(np.matrix(df2), missing_val_char=np.NaN)
-    assert vis_object2.get_xlim() == (0.0, 4.0)
+    assert vis_object.get_xlim() == (0.0, 4.0)
 
 def test_list():
     """
@@ -94,14 +94,14 @@ def test_char():
     """
     This test ensures the vis_missing rejects unrecognized missing value characters 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         vis_missing(df2, missing_val_char="i")
 
 def test_colour():
     """
     This test ensures the vis_missing can warn if the colour specified is not accepted. 
     """
-    with pytest.raises(Warning):
+    with pytest.raises(AssertionError):
         vis_missing(df2, colour="magic")
 
 ### tests for impute_missing()
