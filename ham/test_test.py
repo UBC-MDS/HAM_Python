@@ -90,6 +90,19 @@ def test_list():
     with pytest.raises(ValueError):
         vis_missing(list(df2), missing_val_char=np.NaN)
 
+def test_char():
+    """
+    This test ensures the vis_missing rejects unrecognized missing value characters 
+    """
+    with pytest.raises(ValueError):
+        vis_missing(df2, missing_val_char="i")
+
+def test_colour():
+    """
+    This test ensures the vis_missing can warn if the colour specified is not accepted. 
+    """
+    with pytest.raises(Warning):
+        vis_missing(df2, colour="magic")
 
 ### tests for impute_missing()
 
