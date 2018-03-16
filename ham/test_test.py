@@ -118,9 +118,9 @@ def test_compare():
         raise ValueError("The result has some problem")
 
 def test_input():
-    '''
+    """
     Check input types of the function
-    '''
+    """
     with pytest.raises(TypeError): # column name must be a string
         compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.NaN)
     
@@ -136,7 +136,7 @@ def test_input():
         
 def no_change():
     """
-    
+    Test if there is no change to the dataframe after imputation.
     """
     meds = ["CC","MIP"]
     feature = 'col1'
