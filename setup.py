@@ -6,5 +6,5 @@ setup(
       version='3.0',
       url='http://github.com/UBC-MDS/HAM_Python',
       license='MIT License',
-      long_description=read('README.txt'),
+      long_description=open('README.txt').read(),
       )
