@@ -7,6 +7,5 @@ setup(
       long_description=open('README.md').read(),
       install_requires=['setuptools', 'pandas','numpy', 'seaborn', 'matplotlib'],
       include_package_data=True,
-      license='MIT License',
-      include_package_data=True
+      license='MIT License'
       )
