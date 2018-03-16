@@ -57,26 +57,26 @@ def test_helper_function_output():
 ### tests for vis_missing()
 
 ## the following 3 functions test the visualization outputs for the vis_missing function 
-def test_ylims():
-    """
-    This test ensures the y-axis limits of the heatmap range from 0 to 50 for the df2 data frame.
-    """
-    vis_object = vis_missing(df2, missing_val_char=np.NaN)
-    assert vis_object.get_ylim() == (50.0, 0.0)
+#def test_ylims():
+#   """
+#   This test ensures the y-axis limits of the heatmap range from 0 to 50 for the df2 data frame.
+#   """
+#   vis_object = vis_missing(df2, missing_val_char=np.NaN)
+#   assert vis_object.get_ylim() == (50.0, 0.0)
 
-def test_xlims():
-    """
-    This test ensures the x-axis limits of the heatmap range from 0 to 4 (4 columns) for the df2 data frame.
-    """
-    vis_object = vis_missing(df2, missing_val_char=np.NaN)
-    assert vis_object.get_xlim() == (0.0, 4.0)
+#def test_xlims():
+#    """
+#    This test ensures the x-axis limits of the heatmap range from 0 to 4 (4 columns) for the df2 data frame.
+#    """
+#    vis_object = vis_missing(df2, missing_val_char=np.NaN)
+#    assert vis_object.get_xlim() == (0.0, 4.0)
 
-def test_yticks():
-    """
-    This test ensures the scale of the df2 data frame heatmap is linear  
-    """
-    vis_object = vis_missing(df2, missing_val_char=np.NaN)
-    assert vis_object.get_yscale() == "linear"
+#def test_yticks():
+#    """
+#    This test ensures the scale of the df2 data frame heatmap is linear
+#    """
+#    vis_object = vis_missing(df2, missing_val_char=np.NaN)
+#    assert vis_object.get_yscale() == "linear"
 
 ## for branch coverage - matrix
 def test_matrix():
