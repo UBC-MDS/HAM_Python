@@ -20,6 +20,10 @@ Our package intends to explore the pattern of missing values in users' dataset a
 
 We decided to make this project because we have not found any package that handle both tasks in either R or Python. In R, we found [Amelia](https://cran.r-project.org/web/packages/Amelia/Amelia.pdf) and [vis_dat](https://cran.r-project.org/web/packages/visdat/index.html) package that only visualize the missing data and in Python we found [fancyimpute](https://pypi.python.org/pypi/fancyimpute) that deals with missing value but does not have any visualization and [missingno](https://github.com/ResidentMario/missingno) handle the visualization only. We thought this would be better package for users who do not have much experience in data wrangling.
 
+## Dependencies
+
+HAM_Python requires python 3. 
+
 ## Functions
 
 Currently, our package only handles continuous features.
@@ -78,14 +82,23 @@ Currently, our package only handles continuous features.
 
 ```
 from ham import todf, vis_missing, impute_missing, compare_model
+import numpy as np
+import pandas as pd
 
-ham.todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
+## create matrix with missing values
+mat = np.matrix([[1, 2], [3, np.nan]])
 
-ham.impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
+## todf()
+df = todf(mat, ["k", "o"])
+print(df)
 
-ham.vis_missing(df, missing_val_char = "?")
+impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
 
-ham.compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
+## vis_missing()
+vis_dat = vis_missing(mat, missing_val_char = "?")
+print(vis_dat)
+
+compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
 
 ## HAM in R
