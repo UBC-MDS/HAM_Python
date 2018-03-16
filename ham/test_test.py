@@ -79,12 +79,12 @@ def test_helper_function_output():
 #    assert vis_object.get_yscale() == "linear"
 
 ## for branch coverage - matrix
-def test_matrix():
-    """
-    This test ensures the `todf` function can properly convert a matrix to a data frame to use in vis_missing 
-    """
-    vis_object = vis_missing(np.matrix(df2), missing_val_char=np.NaN)
-    assert vis_object.get_xlim() == (0.0, 4.0)
+#def test_matrix():
+#   """
+#   This test ensures the `todf` function can properly convert a matrix to a data frame to use in vis_missing
+#   """
+#   vis_object = vis_missing(np.matrix(df2), missing_val_char=np.NaN)
+#   assert vis_object.get_xlim() == (0.0, 4.0)
 
 def test_list():
     """
