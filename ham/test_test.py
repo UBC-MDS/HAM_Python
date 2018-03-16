@@ -1,6 +1,8 @@
 import pytest
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 
 from ham import todf, compare_model, impute_missing, vis_missing
 
