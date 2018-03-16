@@ -8,6 +8,5 @@ setup(
       install_requires=['setuptools', 'pandas','numpy', 'seaborn', 'matplotlib'],
       include_package_data=True,
       license='MIT License',
-      install_requires=['setuptools', 'pandas','numpy', 'seaborn', 'matplotlib'],
       include_package_data=True
       )
