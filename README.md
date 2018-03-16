@@ -81,6 +81,7 @@ Currently, our package only handles continuous features.
 ## Typical Usage
 
 ```
+import numpy as np
 from ham import todf, vis_missing, impute_missing, compare_model
 import numpy as np
 import pandas as pd
@@ -88,13 +89,14 @@ import pandas as pd
 ## create matrix with missing values
 mat = np.matrix([[1, 2], [3, np.nan]])
 
-## todf()
-df = todf(mat, ["k", "o"])
-print(df)
+raw_data = np.matrix([[1, 2], [3, np.nan]])
 
-impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
+df1 = todf(raw_data, ["k", "o"])
+print(df1)
 
-## vis_missing()
+df2 = impute_missing(raw_data, 'b', "CC", np.nan)
+print(df2)
+
 vis_dat = vis_missing(mat, missing_val_char = "?")
 print(vis_dat)
 

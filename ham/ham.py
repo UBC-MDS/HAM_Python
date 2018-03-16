@@ -18,22 +18,21 @@ def todf(data_obj, col_names=None):
     if (not isinstance(data_obj, pd.DataFrame)) and (not isinstance(data_obj, np.matrix)):
         raise ValueError("Expected a Data Frame or Matrix")
     
-        if isinstance(data_obj, np.matrix) and col_names != None:
-            if data_obj.shape[1] != len(col_names):
-                raise ValueError("Number of columns in matrix does not match number of column names inputted")
-            if not isinstance(col_names, list):
-                raise ValueError("Expected the column names to be in a list")
-            else:
-                    return pd.DataFrame(data_obj, columns=col_names)
-
-        ## 
-        if isinstance(data_obj, np.matrix) and col_names is None:
-            data_obj = pd.DataFrame(data_obj, columns=list(map(chr, range(97, 97+data_obj.shape[1]))))
-            return data_obj
-    
+    if isinstance(data_obj, np.matrix) and col_names != None:
+        if data_obj.shape[1] != len(col_names):
+            raise ValueError("Number of columns in matrix does not match number of column names inputted")
+        if not isinstance(col_names, list):
+            raise ValueError("Expected the column names to be in a list")
         else:
-        ## if a data frame is inputted, data frame is returned
-            return pd.DataFrame(data_obj)
+            return pd.DataFrame(data_obj, columns=col_names)
+
+    if isinstance(data_obj, np.matrix) and col_names is None:
+        data_obj = pd.DataFrame(data_obj, columns=list(map(chr, range(97, 97+data_obj.shape[1]))))
+        return data_obj
+    
+    else:
+        # if a data frame is inputted, data frame is returned
+        return pd.DataFrame(data_obj)
 
 
 
