@@ -81,7 +81,7 @@ def test_matrix():
     This test ensures the `todf` function can properly convert a matrix to a data frame to use in vis_missing 
     """
     vis_object = vis_missing(np.matrix(df2), missing_val_char=np.NaN)
-    assert vis_object2.get_xlim() == (0.0, 4.0)
+    assert vis_object.get_xlim() == (0.0, 4.0)
 
 def test_list():
     """
