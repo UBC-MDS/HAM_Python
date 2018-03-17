@@ -24,7 +24,17 @@ We decided to make this project because we have not found any package that handl
 
 ## Dependencies
 
-HAM_Python requires python 3. 
+`Python 3`
+
+`matplotlib.pyplot`
+
+`numpy`
+
+`pandas`
+
+`seaborn`
+
+`warnings`
 
 ## Functions
 
@@ -47,7 +57,7 @@ Currently, our package only handles continuous features.
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
-      - 'col`: a column name (string)
+      - `col`: a column name (string)
       - `method`: a method name ("CC", "MIP", "DIP")
       - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
     - Output: a data frame with no missing values in the specified column
@@ -83,7 +93,6 @@ Currently, our package only handles continuous features.
 ## Typical Usage
 
 ```
-import numpy as np
 from ham import todf, vis_missing, impute_missing, compare_model
 import numpy as np
 import pandas as pd
@@ -93,14 +102,19 @@ mat = np.matrix([[1, 2], [3, np.nan]])
 
 raw_data = np.matrix([[1, 2], [3, np.nan]])
 
+vis_dat = vis_missing(mat, missing_val_char = "?")
+print(vis_dat)
+
 df1 = todf(raw_data, ["k", "o"])
 print(df1)
+#      a    b
+# 0  1.0  2.0
+# 1  3.0  NaN
 
 df2 = impute_missing(raw_data, 'b', "CC", np.nan)
 print(df2)
-
-vis_dat = vis_missing(mat, missing_val_char = "?")
-print(vis_dat)
+#      a	 b
+# 0	 1.0   2.0
 
 compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
