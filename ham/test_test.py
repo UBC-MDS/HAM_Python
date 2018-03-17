@@ -68,8 +68,8 @@ def test_ylims_type():
     """
     #   This test ensures the y-axis limits of the heatmap range from 0 to 50 for the df2 data frame.
     #   """
-        vis_object = vis_missing(df2, missing_val_char=np.NaN)
-        assert isinstance(vis_object.get_ylim(), tuple)
+    vis_object = vis_missing(df2, missing_val_char=np.NaN)
+    assert isinstance(vis_object.get_ylim(), tuple)
 
 #def test_xlims():
 #    """
