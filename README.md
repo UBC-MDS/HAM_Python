@@ -2,7 +2,7 @@
 
 Handle All Missing (Values) 
 
-*Feb 8th, 2018*
+[![Build Status](https://travis-ci.org/UBC-MDS/HAM_Python.svg?branch=master)](https://travis-ci.org/UBC-MDS/HAM_Python)
 
 ## Project contributors:
 
