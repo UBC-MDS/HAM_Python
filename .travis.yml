@@ -1,11 +1,11 @@
 language: python
 python:
-  - "3.3"
   - "3.4"
   - "3.5"
 # command to install dependencies
 install: 
-  - pip install git+https://github.com/UBC-MDS/HAM_Python.git
+  - pip install git+https://github.com/jdubchak/HAM_Python.git
+  #- pip install git+https://github.com/UBC-MDS/HAM_Python.git
   - pip install -U pytest
 # command to run tests
 script: pytest
