@@ -226,8 +226,8 @@ def test_input():
     """
     Check input types of the function
     """
-    #with pytest.raises(TypeError): # column name must be a string
-    #    compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.nan)
+    with pytest.raises(TypeError): # column name must be a string
+        compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.nan)
     
     with pytest.raises(TypeError): # the specified column name is not in the data frame
         compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "d", "CC", np.nan)
