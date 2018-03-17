@@ -192,7 +192,12 @@ def compare_model(df, feature, methods, missing_val_char):
     Returns: 
         a summary table comparing the summary statistics: count, mean, std, min, 25%, 50%, 75%, max.
     """
-    
+    if isinstance(feature, str) != True:
+        raise TypeError("column name must be a string") 
+        
+    if feature not in df.columns.values.tolist():
+        raise TypeError("the specified column name is not in the data frame")    
+        
     assert feature != None, "Missing feature"
     assert isinstance(methods, (tuple,list,str,float)), "Input method(s) is not in the right type"
     assert isinstance(feature, (str)), "Input feature is not in the right type"
