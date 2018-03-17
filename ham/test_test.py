@@ -196,7 +196,7 @@ def test_output_matrix():
 
 ### tests for Compare_model() 
 
-<<<<<<< HEAD
+
 def test_compare():
     """
       Unit test for the `compare_model()` function
@@ -237,50 +237,7 @@ def test_input():
         
     with pytest.raises(TypeError): # missing value format is not supported, expected one of a blank space, a question mark and np.NaN, np.nan, np.NAN
         compare_model(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('abc')), "b", "MIP", 0)
-=======
-#def test_compare():
-#   """
-#     Unit test for the `compare_model()` function
-#     It will create a datafame comparing all the statistical information of the dataframe before and after imputation
-#     and between several methods of imputation, then compare it with the result of compare_model()
-#     Return error message if the two results are not the same.
-#   """
-#   meds = ("CC","IMP")
-#   feature = 'col1'
-#   result = compare_model(df,feature,methods = meds)
-#   a = df2[feature].describe()
-#   test = pd.DataFrame(data=a)
-#
-#   for method in meds:
-#     df_after = impute_missing(df2,method,"NaN")
-#     b = df_after[feature].describe()
-#     b = pd.DataFrame(data=b)
-#     name = feature + '_after_' + method
-#     test[name] = b[feature]
-#
-#   if not isinstance(result, pd.DataFrame):
-#       raise TypeError("Output type must be a dataframe")
-#
-#   if not test.equals(result):
-#       raise ValueError("The result has some problem")
 
-#def test_input():
-#   """
-#   Check input types of the function
-#   """
-#   with pytest.raises(TypeError): # column name must be a string
-#       compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), 2, "DIP", np.NaN)
-#
-#   with pytest.raises(TypeError): # the specified column name is not in the data frame
-#       compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "d", "CC", np.nan)
-#
-#   with pytest.raises(TypeError): # method is not applicable
-#       compare_model(pd.DataFrame([[np.nan, 2, 1], [3, np.nan, 1], [np.nan, np.nan, 5]], columns=list('abc')), "b", "multi", np.nan)
-#
-#   with pytest.raises(TypeError): # missing value format is not supported, expected one of a blank space, a question mark and np.NaN, np.nan, np.NAN
-#       compare_model(pd.DataFrame([[0, 2, 1], [3, 0, 1], [0, 0, 5]], columns=list('abc')), "b", "MIP", 0)
->>>>>>> 6c802a1ceeff51e1369ce91575f33618eed15c4a
-    
         
 def no_change():
     """
