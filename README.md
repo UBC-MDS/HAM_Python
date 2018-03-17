@@ -110,7 +110,7 @@ raw_data = todf(raw_data, ["H", "A", "M"])
 vis_missing(raw_data, missing_val_char = np.nan)
 ```
 
-![](img/vis.png)
+![](img/vis_missing_usage.png)
 
 - `impute_missing()`
 
