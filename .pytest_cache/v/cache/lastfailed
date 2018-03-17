@@ -4,5 +4,6 @@
   "ham/test.py::test_input_types": true,
   "ham/test.py::test_output_type": true,
   "ham/test.py::test_output_values": true,
+  "ham/test_test.py": true,
   "ham/test_test.py::test_input": true
 }
