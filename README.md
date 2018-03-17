@@ -24,7 +24,15 @@ We decided to make this project because we have not found any package that handl
 
 ## Dependencies
 
-HAM_Python requires python 3. 
+`matplotlib.pyplot`
+
+`numpy`
+
+`pandas`
+
+`seaborn`
+
+`warnings`
 
 ## Functions
 
@@ -47,7 +55,7 @@ Currently, our package only handles continuous features.
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
-      - 'col`: a column name (string)
+      - `col`: a column name (string)
       - `method`: a method name ("CC", "MIP", "DIP")
       - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
     - Output: a data frame with no missing values in the specified column
