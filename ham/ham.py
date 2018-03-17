@@ -192,22 +192,19 @@ def compare_model(df, feature, methods, missing_val_char):
     """
     
     assert feature != None, "Missing feature"
-    assert isinstance(methods, (tuple,list,str)), "Input method(s) is not in the right type"
-    assert isinstance(feature, (pd.DataFrame, str)), "Input feature is not in the right type"
+    assert isinstance(methods, (tuple,list,str,float)), "Input method(s) is not in the right type"
+    assert isinstance(feature, (str)), "Input feature is not in the right type"
 
     a = df[feature].describe()
     result = pd.DataFrame(data=a)
     
     for method in methods:
-        df_after = impute_missing(df,feature,method,"NaN")
+        df_after = impute_missing(df,feature,method,missing_val_char)
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
         result[name] = b[feature]
     
-	#assert feature != None, "Missing feature"
-    #assert isinstance(methods, list) or isinstance(methods, str), "Input method(s) is not in the right type"
-    #assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), "Input feature is not in the right type"
     return result
 
     

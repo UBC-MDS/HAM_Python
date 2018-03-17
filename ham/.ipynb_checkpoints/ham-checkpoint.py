@@ -18,22 +18,21 @@ def todf(data_obj, col_names=None):
     if (not isinstance(data_obj, pd.DataFrame)) and (not isinstance(data_obj, np.matrix)):
         raise ValueError("Expected a Data Frame or Matrix")
     
-        if isinstance(data_obj, np.matrix) and col_names != None:
-            if data_obj.shape[1] != len(col_names):
-                raise ValueError("Number of columns in matrix does not match number of column names inputted")
-            if not isinstance(col_names, list):
-                raise ValueError("Expected the column names to be in a list")
-            else:
-                    return pd.DataFrame(data_obj, columns=col_names)
-
-        ## 
-        if isinstance(data_obj, np.matrix) and col_names is None:
-            data_obj = pd.DataFrame(data_obj, columns=list(map(chr, range(97, 97+data_obj.shape[1]))))
-            return data_obj
-    
+    if isinstance(data_obj, np.matrix) and col_names != None:
+        if data_obj.shape[1] != len(col_names):
+            raise ValueError("Number of columns in matrix does not match number of column names inputted")
+        if not isinstance(col_names, list):
+            raise ValueError("Expected the column names to be in a list")
         else:
-        ## if a data frame is inputted, data frame is returned
-            return pd.DataFrame(data_obj)
+            return pd.DataFrame(data_obj, columns=col_names)
+
+    if isinstance(data_obj, np.matrix) and col_names is None:
+        data_obj = pd.DataFrame(data_obj, columns=list(map(chr, range(97, 97+data_obj.shape[1]))))
+        return data_obj
+    
+    else:
+        # if a data frame is inputted, data frame is returned
+        return pd.DataFrame(data_obj)
 
 
 
@@ -77,7 +76,7 @@ def vis_missing(data_obj, colour="inferno", missing_val_char=np.NaN):
     
     ## if the colour map specified isn't a cmap option, 
     if colour not in cmaps:
-        warnings.warn("Colour map given is not recognized. Using default inferno.", Warning)
+        warnings.simplefilter("Colour map given is not recognized. Using default inferno.", UserWarning)
         colour = "inferno"
     
     new_df = np.where(df.isnull(), 1, 0)
@@ -193,22 +192,19 @@ def compare_model(df, feature, methods, missing_val_char):
     """
     
     assert feature != None, "Missing feature"
-    assert isinstance(methods, (tuple,list,str)), "Input method(s) is not in the right type"
-    assert isinstance(feature, (pd.DataFrame, str)), "Input feature is not in the right type"
+    assert isinstance(methods, (tuple,list,str,float)), "Input method(s) is not in the right type"
+    assert isinstance(feature, (str)), "Input feature is not in the right type"
 
     a = df[feature].describe()
     result = pd.DataFrame(data=a)
     
     for method in methods:
-        df_after = impute_missing(df,feature,method,"NaN")
+        df_after = impute_missing(df,feature,method,missing_val_char)
         b = df_after[feature].describe()
         b = pd.DataFrame(data=b)
         name = feature + '_after_' + method
         result[name] = b[feature]
     
-	#assert feature != None, "Missing feature"
-    #assert isinstance(methods, list) or isinstance(methods, str), "Input method(s) is not in the right type"
-    #assert isinstance(feature, pd.DataFrame) == True or isinstance(feature, np.ndarray), "Input feature is not in the right type"
     return result
 
     
