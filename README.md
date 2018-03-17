@@ -45,7 +45,7 @@ Currently, our package only handles continuous features.
       - `data_obj`: a data frame or a numerical matrix
       - `col_names`: a list of column names (default is None)
     - Output: If the `col_names` is None, then returns a data frame with small letters ('a', 'b', ...) being column names. Otherwise returns a data frame with user-specified column names.
-    
+
 - Exploratory Function: use matplotlib and seaborn to plot patterns or proportions of missing values in the dataset:
   - `vis_missing()`: creates a heatmap that visualizes the missing values in the data set
     - Input: 
@@ -53,7 +53,7 @@ Currently, our package only handles continuous features.
       - seaborn color scheme, default is "inferno"
       - missing value character (np.NaN, np.NAN, np.nan," ", "", "?")
     - Output: a heatmap that visualizes the missing values in the dataset
-    
+
 - `impute_missing(dfm, col, method, missing_val_char)`: Impute the missing value in a specified column of a data frame or a numerical matrix
     - Input:
       - `dfm`: a data frame or a numerical matrix with missing values
@@ -61,7 +61,7 @@ Currently, our package only handles continuous features.
       - `method`: a method name ("CC", "MIP", "DIP")
       - `missing_val_char`: missing value characters (np.nan, np.NaN, np.NAN, "", "?")
     - Output: a data frame with no missing values in the specified column
-    
+
 - `compare_model()`: Compare summary statistics between various imputation methods
     - Input: 
 
@@ -77,10 +77,10 @@ Currently, our package only handles continuous features.
       ​            MIP     - Imputation with mean value
       ​            DIP     - Imputation with median value
 
-      - `missing_val_char` (str) -- missing value types. 
+      - `missing_val_char` (str or float) -- missing value types. 
 
       ​        Supporting types are:
-      ​            NaN - Not a Number
+      ​            NaN - Not a Number (np.nan, np.NaN, np.NAN)
       ​            ""     - Blank
       ​            "?"   - Question mark
 
@@ -92,53 +92,45 @@ Currently, our package only handles continuous features.
 
 ## Typical Usage
 
+- Import the package
+
 ```
-<<<<<<< HEAD
-import numpy as np
-<<<<<<< HEAD
-import pandas as pd
-import ham
-
-todf(np.matrix([[1, 2], [3, np.nan]]), ["k", "o"])
-
-impute_missing(np.matrix([[1, 2], [3, np.nan]]), 'b', "CC", "NaN")
-
-vis_missing(np.matrix([[1, 2], [3, np.nan]]), missing_val_char = "?")
-=======
-=======
->>>>>>> c4636e6a506209aea9d00d56176b799fe3809efd
-from ham import todf, vis_missing, impute_missing, compare_model
 import numpy as np
 import pandas as pd
+from ham.ham import todf, impute_missing, compare_model, vis_missing
+# (from HAM_Python.ham import ham)
 
-## create matrix with missing values
-mat = np.matrix([[1, 2], [3, np.nan]])
-
-raw_data = np.matrix([[1, 2], [3, np.nan]])
-
-vis_dat = vis_missing(mat, missing_val_char = "?")
-print(vis_dat)
-
-df1 = todf(raw_data, ["k", "o"])
-print(df1)
-#      a    b
-# 0  1.0  2.0
-# 1  3.0  NaN
-
-df2 = impute_missing(raw_data, 'b', "CC", np.nan)
-print(df2)
-<<<<<<< HEAD
-
-vis_dat = vis_missing(mat, missing_val_char = "?")
-print(vis_dat)
->>>>>>> 92023959306f2a61fd47966b8b50d2ec9a068931
-=======
-#      a	 b
-# 0	 1.0   2.0
->>>>>>> c4636e6a506209aea9d00d56176b799fe3809efd
-
-compare_model(np.matrix([[1, 2], [3, np.nan]]), 'b', ("CC","MIP"), "NaN")
 ```
+
+- `vis_missing()`
+
+``` 
+raw_data = np.matrix([[1, 2, 3], [3, np.nan, 5], [9, 22, np.nan]])
+raw_data = todf(raw_data, ["H", "A", "M"])
+vis_missing(raw_data, missing_val_char = np.nan)
+```
+
+![](img/vis.png)
+
+- `impute_missing()`
+
+``` 
+df = impute_missing(raw_data, 'A', "CC", np.NaN)
+
+print(df)
+```
+
+![](img/rawdata.png) ![](img/afterimp.png)
+
+- `compare_model()`
+
+``````
+compare_model(raw_data, 'A', ("CC","MIP"), np.nan)
+``````
+
+![](img/compare.png)
+
+
 
 ## HAM in R
 
