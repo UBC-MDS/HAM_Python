@@ -1,7 +1,5 @@
 import seaborn as sns
-import matplotlib
 import matplotlib.pyplot as plt 
-matplotlib.use('Agg')
 import numpy as np
 import pandas as pd 
 import warnings
@@ -86,7 +84,7 @@ def vis_missing(data_obj, colour="inferno", missing_val_char=np.NaN):
     fig = sns.heatmap(new_df, yticklabels=False, cmap=plt.cm.get_cmap(colour, 2))
     cbar = fig.collections[0].colorbar
     cbar.set_ticks([0.25,0.75])
-    cbar.set_ticklabels(["Not Missing Value", "Missing Value"])      
+    cbar.set_ticklabels(["Missing Value", "Not Missing Value"])      
     
     return fig
 
