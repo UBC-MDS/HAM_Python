@@ -106,6 +106,7 @@ from ham.ham import todf, impute_missing, compare_model, vis_missing
 
 ``` 
 raw_data = np.matrix([[1, 2, 3], [3, np.nan, 5], [9, 22, np.nan]])
+raw_data = todf(raw_data, ["H", "A", "M"])
 vis_missing(raw_data, missing_val_char = np.nan)
 ```
 
