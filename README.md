@@ -24,6 +24,8 @@ We decided to make this project because we have not found any package that handl
 
 ## Dependencies
 
+`Python 3`
+
 `matplotlib.pyplot`
 
 `numpy`
